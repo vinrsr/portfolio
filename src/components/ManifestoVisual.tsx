@@ -4,12 +4,12 @@
 
 import * as THREE from 'three';
 import { useRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Icosahedron, MeshTransmissionMaterial, Environment } from '@react-three/drei';
 
 // This CameraRig component is a child of Canvas, so it can use useFrame. Correct.
 function CameraRig() {
-  useFrame((state, delta) => {
+  useFrame((state) => {
     state.camera.position.lerp(
       new THREE.Vector3(state.mouse.x * 0.5, state.mouse.y * 0.5, 5),
       0.02
@@ -22,7 +22,7 @@ function CameraRig() {
 // --- NEW COMPONENT FOR ALL OUR 3D CONTENT ---
 // This component is a child of Canvas, so it's safe to use hooks here.
 function SceneContent() {
-  const meshRef = useRef();
+  const meshRef = useRef<THREE.Mesh>(null);
 
   // Now it's safe to call useFrame here!
   useFrame((state, delta) => {

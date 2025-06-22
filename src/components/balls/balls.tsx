@@ -1,36 +1,43 @@
 import * as THREE from 'three'
-import { Suspense, useRef, useReducer, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Suspense, useRef, useReducer, useMemo, type ReactNode } from 'react'
+import { Canvas, useFrame, type CanvasProps } from '@react-three/fiber'
 import { MeshTransmissionMaterial, Environment, Lightformer, Image } from '@react-three/drei'
-import { BallCollider, Physics, RigidBody } from '@react-three/rapier'
+import { BallCollider, Physics, RigidBody, type RapierRigidBody } from '@react-three/rapier'
 import { EffectComposer, N8AO, Bloom, DepthOfField } from '@react-three/postprocessing'
 import { easing } from 'maath'
 
+type ConnectorProps = {
+  position?: [number, number, number]; // The '?' makes this prop optional
+  children?: React.ReactNode;
+  color?: string;
+  roughness?: number;
+  accent?: boolean;
+  opacity?: number;
+}
+
+type ModelProps = {
+  children?: ReactNode; // The '?' makes children optional
+  color?: string;
+  roughness?: number;
+  opacity?: number;
+}
+
 const accents = [
-  // '#FFD700',
   '#0A0A0A',
-  // '#ededed',
-  // '#E5C07B',
-  // '#1A1A1A',
-  // '#B8860B',
 ]
-/**
- * Creates an array of 9 ball configurations, each with a random color and roughness.
- */
+
 const shuffle = () => {
   return Array.from({ length: 99 }, () => ({
     color: accents[Math.floor(Math.random() * accents.length)],
     roughness: Math.random() > 0.5 ? 0.4 : 0.75,
-    // roughness: 0,
     accent: true,
-    // opacity: THREE.MathUtils.randFloat(0.5, 0.95)
     opacity: 1
   }));
 };
 
-export default function Balls(props) {
+export default function Balls(props: CanvasProps) {
   // We use the reducer simply to get a function (`reshuffle`) that triggers a re-render
-  const [shuffleTrigger, reshuffle] = useReducer((state) => state + 1, 0);
+  const [shuffleTrigger] = useReducer((state) => state + 1, 0);
 
   // useMemo will now re-run the `shuffle()` function every time `shuffleTrigger` changes.
   // This generates a new random set of colors.
@@ -74,7 +81,7 @@ export default function Balls(props) {
         </Environment>
       </Suspense>
 
-      <EffectComposer disableNormalPass multisampling={8}>
+      <EffectComposer multisampling={8}>
         <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
         <Bloom intensity={0.75} luminanceThreshold={.8} mipmapBlur />
         <DepthOfField
@@ -88,12 +95,13 @@ export default function Balls(props) {
   );
 }
 
-function Connector({ position, children, vec = new THREE.Vector3(), scale, r = THREE.MathUtils.randFloatSpread, accent, ...props }) {
-  const api = useRef()
-  const pos = useMemo(() => position || [r(10), r(10), r(10)], [])
-  useFrame((state, delta) => {
-    delta = Math.min(0.1, delta)
-    api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(0.00005))
+function Connector({ position, ...props }: ConnectorProps) {
+  const r = THREE.MathUtils.randFloatSpread;
+  const api = useRef<RapierRigidBody>(null)
+  const pos = useMemo<[number, number, number]>(() => position || [r(10), r(10), r(10)], [])
+  const vec = new THREE.Vector3()
+  useFrame(() => {
+    api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(0.00005), true)
   })
 
   return (
@@ -105,7 +113,7 @@ function Connector({ position, children, vec = new THREE.Vector3(), scale, r = T
 }
 
 function Pointer({ vec = new THREE.Vector3() }) {
-  const ref = useRef()
+  const ref = useRef<RapierRigidBody>(null);
   useFrame(({ mouse, viewport }) => {
     ref.current?.setNextKinematicTranslation(vec.set((mouse.x * viewport.width) / 2, (mouse.y * viewport.height) / 2, 0))
   })
@@ -128,13 +136,13 @@ function Pointer({ vec = new THREE.Vector3() }) {
 
 }
 
-function Model({ children, color = '#0A0A0A', roughness = 0.75, opacity=1, ...props }) {
-  const ref = useRef()
+function Model({ children, color = '#0A0A0A', roughness = 0.75, opacity=1 }: ModelProps) {
+  const ref = useRef<THREE.Mesh<THREE.SphereGeometry, THREE.MeshStandardMaterial>>(null);
 
-  useFrame((state, delta) => {
+  if (ref.current) {
     // Animate the color
-    easing.dampC(ref.current.material.color, color, 0.2, delta)
-  })
+    easing.dampC(ref.current.material.color, color, 0.2, 0);
+  }
 
   return (
     // Use a standard mesh with sphere geometry

@@ -21,7 +21,7 @@ export default function ConnectSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.8 },
     },
   };
 
@@ -36,11 +36,11 @@ export default function ConnectSection() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <motion.h2 variants={childVariants} className="connect-title">
-          Let's Connect
+          Let&apos;s Connect
         </motion.h2>
         
         <motion.p variants={childVariants} className="connect-intro">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.
+          I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.
         </motion.p>
         
         {/* --- 4. Replace text links with SVG Icons --- */}
@@ -72,7 +72,7 @@ export default function ConnectSection() {
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="email" name="email" placeholder="Your Email" required />
           </div>
-          <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+          <textarea name="message" placeholder="Your Message" rows={6} required></textarea>
           <button type="submit" className="submit-button">Send Message</button>
         </motion.form>
 
