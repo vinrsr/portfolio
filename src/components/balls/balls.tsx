@@ -27,7 +27,7 @@ const accents = [
 ]
 
 const shuffle = () => {
-  return Array.from({ length: 99 }, () => ({
+  return Array.from({ length: 100 }, () => ({
     color: accents[Math.floor(Math.random() * accents.length)],
     roughness: Math.random() > 0.5 ? 0.4 : 0.75,
     accent: true,
@@ -53,11 +53,6 @@ export default function Balls(props: CanvasProps) {
         <Pointer />
         {/* The newly generated random connectors are mapped here */}
         {connectors.map((props, i) => <Connector key={i} {...props} />)}
-        <Connector position={[10, 10, 5]}>
-          <Model>
-            <MeshTransmissionMaterial clearcoat={1} thickness={0.1} anisotropicBlur={0.1} chromaticAberration={0.1} samples={8} resolution={512} />
-          </Model>
-        </Connector>
       </Physics>
 
       {/* --- 2. ADD THE IMAGE COMPONENT HERE --- */}
@@ -137,24 +132,17 @@ function Pointer({ vec = new THREE.Vector3() }) {
 }
 
 function Model({ children, color = '#0A0A0A', roughness = 0.75, opacity=1 }: ModelProps) {
-  const ref = useRef<THREE.Mesh<THREE.SphereGeometry, THREE.MeshStandardMaterial>>(null);
-
-  if (ref.current) {
-    // Animate the color
-    easing.dampC(ref.current.material.color, color, 0.2, 0);
-  }
-
   return (
-    // Use a standard mesh with sphere geometry
-    <mesh ref={ref} castShadow receiveShadow scale={1}>
+    <mesh castShadow receiveShadow scale={1}>
       <sphereGeometry args={[.1, 32, 32]} />
       <meshStandardMaterial
-        metalness={.2}
-        roughness={roughness}
-        transparent={true}
+        color={color}         // Set the color directly
+        metalness={0}         // Make it non-metallic to avoid bright reflections
+        roughness={roughness}   // Use the high roughness value for a matte finish
+        transparent={false}   // No need for transparency on these solid balls
         opacity={opacity}
       />
       {children}
     </mesh>
-  )
+  );
 }
