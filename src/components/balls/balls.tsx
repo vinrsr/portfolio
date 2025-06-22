@@ -42,7 +42,7 @@ export default function Balls(props: CanvasProps) {
     const checkMobile = window.innerWidth < 768;
     
     if (checkMobile) {
-      setBallCount(30);
+      setBallCount(10);
     }
   }, []);
 
@@ -80,7 +80,7 @@ export default function Balls(props: CanvasProps) {
 
       <EffectComposer multisampling={8}>
         <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
-        <Bloom intensity={0.75} luminanceThreshold={.8} mipmapBlur />
+        {/* <Bloom intensity={0.75} luminanceThreshold={.8} mipmapBlur /> */}
 
         {/* {!isMobile && (
           <DepthOfField
