@@ -1,0 +1,2 @@
+echo "--- HUSKY PRE-PUSH HOOK IS RUNNING! ---"
+npm run build

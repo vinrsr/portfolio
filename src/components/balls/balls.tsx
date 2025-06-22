@@ -3,7 +3,7 @@ import { Suspense, useRef, useReducer, useMemo, useEffect, useState, type ReactN
 import { Canvas, useFrame, type CanvasProps } from '@react-three/fiber'
 import { Environment, Lightformer, Image } from '@react-three/drei'
 import { BallCollider, Physics, RigidBody, type RapierRigidBody } from '@react-three/rapier'
-import { EffectComposer, N8AO, Bloom } from '@react-three/postprocessing'
+import { EffectComposer, N8AO } from '@react-three/postprocessing'
 
 type ConnectorProps = {
   position?: [number, number, number];
