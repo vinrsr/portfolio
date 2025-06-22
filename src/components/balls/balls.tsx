@@ -3,7 +3,7 @@ import { Suspense, useRef, useReducer, useMemo, useEffect, useState, type ReactN
 import { Canvas, useFrame, type CanvasProps } from '@react-three/fiber'
 import { Environment, Lightformer, Image } from '@react-three/drei'
 import { BallCollider, Physics, RigidBody, type RapierRigidBody } from '@react-three/rapier'
-import { EffectComposer, N8AO, Bloom, DepthOfField } from '@react-three/postprocessing'
+import { EffectComposer, N8AO, Bloom } from '@react-three/postprocessing'
 
 type ConnectorProps = {
   position?: [number, number, number];
@@ -36,12 +36,10 @@ const shuffle = (count = 80) => {
 
 export default function Balls(props: CanvasProps) {
   const [shuffleTrigger] = useReducer((state) => state + 1, 0);
-  const [isMobile, setIsMobile] = useState(false);
   const [ballCount, setBallCount] = useState(80);
 
    useEffect(() => {
     const checkMobile = window.innerWidth < 768;
-    setIsMobile(checkMobile);
     
     if (checkMobile) {
       setBallCount(30);

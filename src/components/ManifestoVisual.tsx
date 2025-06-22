@@ -4,7 +4,7 @@
 
 import * as THREE from 'three';
 import { useState, useEffect, useRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Icosahedron, MeshTransmissionMaterial, Environment } from '@react-three/drei';
 
 // This CameraRig component is a child of Canvas, so it can use useFrame. Correct.
