@@ -42,7 +42,7 @@ export default function Balls(props: CanvasProps) {
     const checkMobile = window.innerWidth < 768;
     
     if (checkMobile) {
-      setBallCount(0);
+      setBallCount(5);
     }
   }, []);
 

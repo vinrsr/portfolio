@@ -1,6 +1,6 @@
 import '../app/styles/manifesto.css';
 import { motion } from 'framer-motion';
-import Sculpture from './ManifestoVisual';
+// import Sculpture from './ManifestoVisual';
 
 export default function ManifestoSection() {
   const containerVariants = {
@@ -26,7 +26,7 @@ export default function ManifestoSection() {
     <section id="manifesto" className="manifesto-split-section">
       
       <div className="manifesto-visual-content">
-        <Sculpture />
+        {/* <Sculpture /> */}
       </div>
 
       <motion.div 
