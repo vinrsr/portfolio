@@ -22,7 +22,7 @@ export default function LabSection() {
       <div className="lab-content">
         <h2 className="lab-title">The Lab</h2>
         <p className="lab-intro">
-          A collection of experiments, prototypes, and explorations.
+          A collection of experiments, samples, prototypes, and explorations.
         </p>
         
         <div className="lab-grid">

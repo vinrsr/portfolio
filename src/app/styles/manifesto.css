@@ -51,7 +51,7 @@
 @media (max-width: 900px) {
   .manifesto-split-section {
     grid-template-columns: 1fr;
-    text-align: center;
+    text-align: left;
   }
   .manifesto-text-content {
     align-items: center;

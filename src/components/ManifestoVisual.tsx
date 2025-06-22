@@ -3,8 +3,8 @@
 "use client";
 
 import * as THREE from 'three';
-import { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useState, useEffect, useRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Icosahedron, MeshTransmissionMaterial, Environment } from '@react-three/drei';
 
 // This CameraRig component is a child of Canvas, so it can use useFrame. Correct.
@@ -21,10 +21,9 @@ function CameraRig() {
 
 // --- NEW COMPONENT FOR ALL OUR 3D CONTENT ---
 // This component is a child of Canvas, so it's safe to use hooks here.
-function SceneContent() {
+function SceneContent({ scale }: { scale: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
 
-  // Now it's safe to call useFrame here!
   useFrame((state, delta) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += delta * 0.2;
@@ -37,7 +36,7 @@ function SceneContent() {
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, -5]} intensity={2} />
 
-      <Icosahedron ref={meshRef} args={[1.5, 0]}>
+      <Icosahedron ref={meshRef} args={[1.5, 0]} scale={scale}>
         <MeshTransmissionMaterial 
           transmission={1}
           thickness={0.5}
@@ -52,13 +51,24 @@ function SceneContent() {
   );
 }
 
-
-// --- THE DEFAULT EXPORT IS NOW VERY SIMPLE ---
-// Its only job is to create the Canvas and render our scene inside it.
 export default function Sculpture() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // When the component mounts, this runs, setting isMounted to true.
+    setIsMounted(true);
+  }, []); // The empty array ensures this runs only once.
+
+  if (!isMounted) {
+    return null;
+  }
+
+  const isMobile = window.innerWidth < 900;
+  const crystalScale = isMobile ? .5 : 1;
+  
   return (
     <Canvas camera={{ fov: 45, position: [0, 0, 5] }}>
-      <SceneContent />
+      <SceneContent scale={crystalScale} />
     </Canvas>
   );
 }

@@ -1,12 +1,12 @@
 import * as THREE from 'three'
-import { Suspense, useRef, useReducer, useMemo, type ReactNode } from 'react'
+import { Suspense, useRef, useReducer, useMemo, useEffect, useState, type ReactNode } from 'react'
 import { Canvas, useFrame, type CanvasProps } from '@react-three/fiber'
 import { Environment, Lightformer, Image } from '@react-three/drei'
 import { BallCollider, Physics, RigidBody, type RapierRigidBody } from '@react-three/rapier'
 import { EffectComposer, N8AO, Bloom, DepthOfField } from '@react-three/postprocessing'
 
 type ConnectorProps = {
-  position?: [number, number, number]; // The '?' makes this prop optional
+  position?: [number, number, number];
   children?: React.ReactNode;
   color?: string;
   roughness?: number;
@@ -15,7 +15,7 @@ type ConnectorProps = {
 }
 
 type ModelProps = {
-  children?: ReactNode; // The '?' makes children optional
+  children?: ReactNode;
   color?: string;
   roughness?: number;
   opacity?: number;
@@ -25,8 +25,8 @@ const accents = [
   '#0A0A0A',
 ]
 
-const shuffle = () => {
-  return Array.from({ length: 100 }, () => ({
+const shuffle = (count = 80) => {
+  return Array.from({ length: count }, () => ({
     color: accents[Math.floor(Math.random() * accents.length)],
     roughness: Math.random() > 0.5 ? 0.4 : 0.75,
     accent: true,
@@ -35,16 +35,23 @@ const shuffle = () => {
 };
 
 export default function Balls(props: CanvasProps) {
-  // We use the reducer simply to get a function (`reshuffle`) that triggers a re-render
   const [shuffleTrigger] = useReducer((state) => state + 1, 0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [ballCount, setBallCount] = useState(80);
 
-  // useMemo will now re-run the `shuffle()` function every time `shuffleTrigger` changes.
-  // This generates a new random set of colors.
-  const connectors = useMemo(() => shuffle(), [shuffleTrigger]);
+   useEffect(() => {
+    const checkMobile = window.innerWidth < 768;
+    setIsMobile(checkMobile);
+    
+    if (checkMobile) {
+      setBallCount(30);
+    }
+  }, []);
+
+  const connectors = useMemo(() => shuffle(ballCount), [shuffleTrigger, ballCount]);
 
   return (
-    // Pass the `reshuffle` function to the Canvas's onClick event
-    <Canvas /*onClick={reshuffle}*/ shadows dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 40 }} {...props}>
+    <Canvas shadows dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 40 }} {...props}>
       <color attach="background" args={['#0A0A0A']} />
       <ambientLight intensity={10} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
@@ -54,8 +61,6 @@ export default function Balls(props: CanvasProps) {
         {connectors.map((props, i) => <Connector key={i} {...props} />)}
       </Physics>
 
-      {/* --- 2. ADD THE IMAGE COMPONENT HERE --- */}
-      {/* This will render your logo as a 2D plane within the 3D space */}
       <Suspense fallback={null}>
         <Image
           url="/logo-white.png"   // Path to your logo in the /public folder
@@ -78,12 +83,15 @@ export default function Balls(props: CanvasProps) {
       <EffectComposer multisampling={8}>
         <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
         <Bloom intensity={0.75} luminanceThreshold={.8} mipmapBlur />
-        <DepthOfField
-          focusDistance={0.015} // Where the camera focuses
-          focalLength={0.02}   // The strength of the blur
-          bokehScale={0}     // The size of the blur effect
-          height={480}
-        />
+
+        {/* {!isMobile && (
+          <DepthOfField
+            focusDistance={0.015}
+            focalLength={0.02}
+            bokehScale={0}
+            height={480}
+          />
+        )} */}
       </EffectComposer>
     </Canvas>
   );
@@ -119,12 +127,6 @@ function Pointer({ vec = new THREE.Vector3() }) {
       ref={ref}
     >
       <BallCollider args={[.5]} />
-
-      {/* This mesh will represent the collider visually */}
-      {/* <mesh>
-        <sphereGeometry args={[.5, 32, 32]} />
-        <meshBasicMaterial color="red" wireframe />
-      </mesh> */}
     </RigidBody>
   )
 
@@ -133,12 +135,12 @@ function Pointer({ vec = new THREE.Vector3() }) {
 function Model({ children, color = '#0A0A0A', roughness = 0.75, opacity=1 }: ModelProps) {
   return (
     <mesh castShadow receiveShadow scale={1}>
-      <sphereGeometry args={[.1, 32, 32]} />
+      <sphereGeometry args={[.1, 16, 16]} />
       <meshStandardMaterial
-        color={color}         // Set the color directly
-        metalness={0}         // Make it non-metallic to avoid bright reflections
-        roughness={roughness}   // Use the high roughness value for a matte finish
-        transparent={false}   // No need for transparency on these solid balls
+        color={color}
+        metalness={0}
+        roughness={roughness}
+        transparent={false}
         opacity={opacity}
       />
       {children}

@@ -1,11 +1,8 @@
-// components/ManifestoSection.tsx
-
 import '../app/styles/manifesto.css';
 import { motion } from 'framer-motion';
 import Sculpture from './ManifestoVisual';
 
 export default function ManifestoSection() {
-  // Animation variants (these remain the same)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -57,8 +54,6 @@ export default function ManifestoSection() {
           The result is a product that is both{' '}
           <span className="highlight-text">technically robust and artistically compelling</span>, ensuring your vision is realized without compromise.
         </motion.p>
-
-        {/* --- END OF NEW TEXT CONTENT --- */}
 
       </motion.div>
 
