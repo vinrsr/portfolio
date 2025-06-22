@@ -1,10 +1,9 @@
 import * as THREE from 'three'
 import { Suspense, useRef, useReducer, useMemo, type ReactNode } from 'react'
 import { Canvas, useFrame, type CanvasProps } from '@react-three/fiber'
-import { MeshTransmissionMaterial, Environment, Lightformer, Image } from '@react-three/drei'
+import { Environment, Lightformer, Image } from '@react-three/drei'
 import { BallCollider, Physics, RigidBody, type RapierRigidBody } from '@react-three/rapier'
 import { EffectComposer, N8AO, Bloom, DepthOfField } from '@react-three/postprocessing'
-import { easing } from 'maath'
 
 type ConnectorProps = {
   position?: [number, number, number]; // The '?' makes this prop optional
