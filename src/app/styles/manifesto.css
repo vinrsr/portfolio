@@ -1,0 +1,59 @@
+/* CSS for the Manifesto Section */
+
+.manifesto-split-section {
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem;
+  box-sizing: border-box;
+}
+
+.manifesto-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  color: #ededed;
+}
+
+.manifesto-visual-content {
+  width: 100%;
+  height: 80vh;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.manifesto-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem 0;
+  color: #fff; /* Make the title solid white to stand out */
+}
+
+.manifesto-text {
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.highlight-text {
+  color: #E5C07B;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .manifesto-split-section {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .manifesto-text-content {
+    align-items: center;
+  }
+}

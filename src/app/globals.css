@@ -1,26 +1,252 @@
-@import "tailwindcss";
+@import url('https://rsms.me/inter/inter.css');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (max-width: 1200px) {
+  /* .container {
+    padding: 2em 4em 2em 4em;
+    gap: 2em;
+  } */
+  .button {
+    height: 48px;
+    border-radius: 30px;
+    padding: 0em 2em;
+  }
+  .label {
+    font-size: 2em;
+  }
+  .caption {
+    font-size: 1.5em;
   }
 }
 
+@media (max-width: 800px) {
+  .caption::after {
+    content: 'OSS dev collective  for the creative space';
+  }
+  .label::after {
+    content: 'PMNDRS';
+  }
+  /* .container {
+    padding: 2em 3em 2em 3em;
+    gap: 2em;
+  } */
+  .button {
+    height: 36px;
+    border-radius: 30px;
+    padding: 0em 1.25em;
+    font-size: 0.7em;
+  }
+  .label {
+    font-size: 1em;
+  }
+  .caption {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    gap: 0.5em;
+  }
+  .caption::after {
+    content: 'OSS dev collective';
+  }
+  /* .container {
+    padding: 2em 2em 2em 2em;
+    gap: 2em;
+  } */
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 1. Allow the body to scroll and apply the master gradient */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: sans-serif;
+  /* This gradient will stretch across the entire page height */
+  background: linear-gradient(
+    to bottom, 
+    #101018 0%,    /* Color at the top (landing) */
+    #0A0A0A 50%,    /* Color in the middle */
+    #1C1C1C 100%   /* Color at the bottom (contact) */
+  );
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f0f0f0;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+.full-screen-relative {
+  position: relative;
+  height: 100vh; /* Give it plenty of space */
+  width: 100%;
+  display: flex;
+  /* flex-direction: column;
+  justify-content: center; */
+}
+
+.container {
+  position: relative; /* <-- Make sure this line is present */
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 10;
+  pointer-events: none;
+  width: 100%;
+}
+
+.brand-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* The glow still helps */
+}
+
+.brand-logo-title {
+  width: 250px; /* Adjust this to control the size of your logo title */
+  height: auto; /* Maintains the aspect ratio */
+}
+
+.brand-tagline {
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+  /* Add a smaller glow here too */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.logo-container {
+  position: absolute;
+  top: 7%;  /* Adjust vertical position */
+  left: 50%; /* Adjust horizontal position */
+  transform: translate(-50%, -50%);
+  z-index: 20; /* Make sure it's on top of everything */
+}
+
+.overlay-landing-scroll {
+  position: absolute;
+  bottom: 10vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  color: white;
+}
+
+/* 3. Adjust your existing overlay and logo styles to be contained */
+.logo-container,
+.overlay-content,
+.connect-link { /* Assuming you added the top-right connect link */
+  position: absolute; /* They are now positioned relative to .landing-section */
+  z-index: 10;
+}
+
+.logo-image {
+  width: 50px; /* Adjust the size of your logo */
+  height: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.logo-image:hover {
+  opacity: 1;
+}
+
+.canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav {
+  position: relative; /* Or absolute, if you prefer */
+  z-index: 10; /* Ensures the nav is on top of the canvas */
+  padding: 20px;
+  color: white;
+  font-family: sans-serif;
+}
+
+.label {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.label::after {
+  content: 'POIMANDRES';
+}
+
+.caption {
+  font-size: 2.5em;
+  display: inline-block;
+  max-width: 500px;
+}
+
+.caption::after {
+  content: 'Open source developer collective for the creative space';
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #141622;
+  color: white;
+  height: 52px;
+  border-radius: 30px;
+  padding: 0em 2em;
+  white-space: pre;
+}
+
+.button.gray {
+  background: #ccc;
+  color: #141622;
+}
+
+/* 2. Define our two main sections */
+.landing-section {
+  height: 100vh; /* Make it exactly one screen tall */
+  width: 100%;
+  position: relative; /* Crucial for positioning overlays inside it */
+  overflow: hidden; /* Ensures the 3D canvas doesn't spill out */
+}
+
+.contact-section {
+  position: relative;
+  height: 100vh; /* Give it plenty of space */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 4rem 2rem; */
+  
+  background-color: green;
 }

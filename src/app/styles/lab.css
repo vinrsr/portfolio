@@ -1,0 +1,148 @@
+/* --- STYLES FOR YOUR LAB SECTION --- */
+
+/* 1. Main Section Container (No changes) */
+.lab-section {
+  background-color: #0A0A0A;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem;
+  box-sizing: border-box;
+}
+
+/* 2. Content Wrapper (No changes) */
+.lab-content {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+/* 3. Typography Styles (No changes) */
+.lab-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ededed;
+}
+
+.lab-intro {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #ededed;
+  opacity: 0.9;
+  max-width: 700px;
+  margin-bottom: 2rem;
+}
+
+/* 4. The Grid for Your Experiments (No changes) */
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 2rem;
+  width: 100%;
+}
+
+/* 5. The Individual Experiment Cards -- MODIFIED for video content */
+.experiment-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  
+  /* --- KEY CHANGES HERE --- */
+  position: relative; /* Needed to position video player inside */
+  overflow: hidden; /* Keeps video within the rounded corners */
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Padding is now handled by the .card-content div */
+}
+
+/* 6. A Subtle Hover Effect for the Cards (No changes) */
+.experiment-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(229, 192, 123, 0.5);
+}
+
+/* --- 7. NEW STYLES for the Video Player and Text Content --- */
+
+/* This wrapper will contain the video and force a 16:9 aspect ratio */
+.video-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+  width: 100%;
+  background-color: #000; /* Black background while video loads */
+}
+
+/* The ReactPlayer component will be absolutely positioned inside the wrapper */
+.video-wrapper .react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* This new class now holds the text content below the video */
+.card-content {
+  padding: 1.5rem;
+}
+
+/* 8. Styles for the text inside the cards (No changes) */
+.experiment-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ededed;
+  margin: 0 0 0.75rem 0;
+}
+
+.experiment-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ededed;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* This makes the <a> tag behave like a block for layout purposes */
+.experiment-card-link {
+  text-decoration: none; /* Removes the default link underline */
+  color: inherit; /* Makes the text inherit the color from the card */
+}
+
+/* A new class for card content that needs to be centered vertically */
+.card-content-link {
+  /* This will vertically center the text since there's no video */
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: none; /* Remove the gradient overlay used for video cards */
+}
+
+/* Style for the card title to align the text and icon */
+.card-title-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Or 1 / 1 for a square logo */
+  background-color: #111;
+  overflow: hidden;
+}
+
+/* --- RESPONSIVE DESIGN FOR MOBILE --- (No changes) */
+
+@media (max-width: 768px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}

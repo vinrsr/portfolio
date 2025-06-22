@@ -1,103 +1,139 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from 'react'
+import Instagrams from '../components/contact/instagram/Instagram';
+import LandingSection from '@/components/landing';
+import ManifestoSection from '@/components/manifesto';
+import LabSection from '@/components/lab';
+import ConnectSection from '@/components/connect';
+import FooterSection from '@/components/footer';
+import { FadeIn, TopLeft, LeftMiddle } from '../components/contact/instagram/layout/styles.jsx'
+import '../components/contact/instagram/layout/styles.css'
+import Overlay from '../components/contact/instagram/layout/Overlay'
+import Image from 'next/image';
+
+import { Canvas, useFrame } from "@react-three/fiber"
+import { useGLTF, Float, Lightformer, Text, Html, ContactShadows, Environment, MeshTransmissionMaterial } from "@react-three/drei"
+import { Bloom, EffectComposer, N8AO, TiltShift2 } from "@react-three/postprocessing"
+import { Route, Link, useLocation } from "wouter"
+import { suspend } from "suspend-react"
+import { easing } from "maath"
+
+useGLTF.preload("/instagram-logo.glb")
 
 export default function Home() {
+  const [speed, set] = useState(1)
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main>
+      {/* --- SECTION 1: Your Landing Page --- */}
+      <LandingSection />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      {/* --- SECTION 2: Your Contact Page --- */}
+      {/* <ContactSection speed={speed} setSpeed={set} /> */}
+
+      {/* <InstagramSection /> */}
+
+      <ManifestoSection />
+
+      <LabSection />
+
+      <ConnectSection />
+
+      <FooterSection />
+    </main>
   );
+}
+
+
+
+function ContactSection({speed, setSpeed}) {
+  return (
+    <section id="contact" className="contact-section overlay-instagram">
+      <Instagrams speed={speed} />
+      {/* <Overlay /> */}
+
+      <div className='overlay-instagram-connect'>
+        <center>
+          <Image src="/icons/instagram.png" width={100} height={100} alt="VINRSR Brand Logo" className="logo-image"></Image>
+          <h3>Let's Connect!</h3>
+        </center>
+      </div>
+
+      <div className='overlay-instagram-range'>
+        <input type="range" min="0" max="10" value={speed} step="1" onChange={(e) => setSpeed(e.target.value)} />
+      </div>
+
+    </section>
+  )
+}
+
+function InstagramSection() {
+  return (
+    <section id="contact" className="contact-section overlay-instagram">
+      <Canvas eventPrefix="client" shadows camera={{ position: [0, 0, 20], fov: 50 }}>
+        <color attach="background" args={["#e0e0e0"]} />
+        <spotLight position={[20, 20, 10]} penumbra={1} castShadow angle={0.2} />
+        <Status position={[0, 0, -10]} />
+        <Float floatIntensity={2}>
+          <Route path="/">
+            <Knot />
+          </Route>
+        </Float>
+        <ContactShadows scale={100} position={[0, -7.5, 0]} blur={1} far={100} opacity={0.85} />
+        <Environment preset="city">
+          <Lightformer intensity={8} position={[10, 5, 0]} scale={[10, 50, 1]} onUpdate={(self) => self.lookAt(0, 0, 0)} />
+        </Environment>
+        <EffectComposer disableNormalPass>
+          <N8AO aoRadius={1} intensity={2} />
+          <Bloom mipmapBlur luminanceThreshold={0.8} intensity={2} levels={8} />
+          <TiltShift2 blur={0.2} />
+        </EffectComposer>
+        <Rig />
+      </Canvas>
+
+    </section>
+  )
+}
+
+function Rig() {
+  useFrame((state, delta) => {
+    easing.damp3(
+      state.camera.position,
+      [Math.sin(-state.pointer.x) * 5, state.pointer.y * 3.5, 15 + Math.cos(state.pointer.x) * 10],
+      0.2,
+      delta,
+    )
+    state.camera.lookAt(0, 0, 0)
+  })
+}
+
+function Knot(props) {
+  const { nodes, materials } = useGLTF("/instagram-logo.glb")
+  console.log(nodes)
+  return (
+    <mesh
+      // scale={5}
+      receiveShadow
+      castShadow
+      geometry={nodes.instagram_logo_mesh.geometry}
+      // geometry={nodes.YoutubeLogo.geometry}
+      material={materials.material}
+      rotation={[45, 0, 0]}
+      {...props}>
+        {/* <MeshTransmissionMaterial backside backsideThickness={5} thickness={2} /> */}
+    </mesh>
+  )
+}
+
+function Status(props) {
+  const [loc] = useLocation()
+  const text = loc === "/" ? "Instagram" : loc
+  return (
+    <Text fontSize={14} letterSpacing={-0.025} color="black" {...props}>
+      {text}
+      <Html style={{ color: "transparent", fontSize: "33.5em" }} transform>
+        {text}
+      </Html>
+    </Text>
+  )
 }

@@ -1,0 +1,141 @@
+/* =================================== */
+/* STYLES FOR THE CONNECT SECTION     */
+/* =================================== */
+
+
+/* --- Main Section Layout --- */
+
+.connect-section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem;
+  box-sizing: border-box;
+  background-color: #0A0A0A; 
+}
+
+.connect-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 700px;
+  width: 100%;
+}
+
+.connect-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ededed;
+}
+
+.connect-intro {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #ededed;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+
+/* --- Social Links & Icons --- */
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Space between the icons */
+}
+
+/* Updated style for SVG icons */
+.social-icon {
+  color: #ededed;
+  opacity: 0.7;
+  font-size: 2.25rem; /* Control the size of the icon with font-size */
+  text-decoration: none;
+  transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  opacity: 1;
+  color: #E5C07B; /* Highlight with your accent color */
+  transform: translateY(-3px) scale(1.05); /* A nice lift effect */
+}
+
+/* A subtle divider line */
+.contact-divider {
+  width: 50px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 1rem 0;
+}
+
+
+/* --- Contact Form Styles --- */
+
+.contact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #ededed;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input {
+  flex: 1; /* Tells both inputs to share the space equally */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #E5C07B;
+}
+
+.submit-button {
+  padding: 1rem 2rem;
+  background-color: #E5C07B;
+  color: #0A0A0A;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start; /* Aligns the button to the left */
+}
+
+.submit-button:hover {
+  background-color: #ffdc73;
+}
+
+
+/* --- Responsive for Mobile --- */
+
+@media (max-width: 768px) {
+  /* On mobile, stack the Name and Email inputs vertically */
+  .form-group {
+    flex-direction: column;
+  }
+}
