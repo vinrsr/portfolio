@@ -1,6 +1,6 @@
 "use client";
 
-import LandingSection from '@/components/landing';
+// import LandingSection from '@/components/landing';
 import ManifestoSection from '@/components/manifesto';
 import LabSection from '@/components/lab';
 import ConnectSection from '@/components/connect';
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main>
       {/* --- SECTION 1: Landing --- */}
-      <LandingSection />
+      {/* <LandingSection /> */}
 
       {/* --- SECTION 2: Manifesto --- */}
       <ManifestoSection />
