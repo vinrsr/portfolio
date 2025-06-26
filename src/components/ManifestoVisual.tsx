@@ -5,9 +5,10 @@
 import * as THREE from 'three';
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Icosahedron, MeshTransmissionMaterial, Environment } from '@react-three/drei';
+import { Environment } from '@react-three/drei';
+import { Model } from '@/components/3d-logo/Vinrsr_logo_3d';
 
-// This CameraRig component is a child of Canvas, so it can use useFrame. Correct.
+
 function CameraRig() {
   useFrame((state) => {
     state.camera.position.lerp(
@@ -19,8 +20,6 @@ function CameraRig() {
   return null;
 }
 
-// --- NEW COMPONENT FOR ALL OUR 3D CONTENT ---
-// This component is a child of Canvas, so it's safe to use hooks here.
 function SceneContent({ scale }: { scale: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
 
@@ -33,19 +32,10 @@ function SceneContent({ scale }: { scale: number }) {
 
   return (
     <>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={.5} />
       <directionalLight position={[5, 5, -5]} intensity={2} />
-
-      <Icosahedron ref={meshRef} args={[1.5, 0]} scale={scale}>
-        <MeshTransmissionMaterial 
-          transmission={1}
-          thickness={0.5}
-          roughness={0.1}
-          color="#c0c0c0"
-        />
-      </Icosahedron>
-
-      <Environment preset="city" />
+      <Model scale={scale} />
+      <Environment preset="studio" />
       <CameraRig />
     </>
   );
@@ -55,16 +45,15 @@ export default function Sculpture() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // When the component mounts, this runs, setting isMounted to true.
     setIsMounted(true);
-  }, []); // The empty array ensures this runs only once.
+  }, []);
 
   if (!isMounted) {
     return null;
   }
 
   const isMobile = window.innerWidth < 900;
-  const crystalScale = isMobile ? .5 : 1;
+  const crystalScale = isMobile ? .5 : .8;
   
   return (
     <Canvas camera={{ fov: 45, position: [0, 0, 5] }}>

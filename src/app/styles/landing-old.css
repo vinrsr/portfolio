@@ -1,0 +1,57 @@
+/* --- CSS for the Compact Circular Scroll Down Button --- */
+
+/* 1. Keyframes for a subtle 'pulsing' or 'bobbing' animation */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, 5px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* 2. The main style for the circular button */
+.scroll-down-button {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Must be the same as width for a perfect circle */
+  border-radius: 50%; /* Makes it a circle */
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ededed;
+  opacity: 0.7;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+
+  /* Apply the pulsing animation */
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.scroll-down-button:hover {
+  opacity: 1;
+  background-color: rgba(229, 192, 123, 0.2); /* Subtle gold on hover */
+  border-color: #E5C07B;
+  animation-play-state: paused; /* Stop animation on hover */
+  transform: translateX(-50%) translateY(-2px) scale(1.05); /* Slight lift on hover */
+}
+
+/* 3. Style for the arrow icon inside the button */
+.scroll-down-button svg {
+  font-size: 1.5rem; /* Adjust icon size as needed */
+}

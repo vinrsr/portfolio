@@ -16,7 +16,8 @@ function Instagram({ index, z, speed }) {
   // useGLTF is an abstraction around R3F's useLoader(GLTFLoader, url)
   // It can automatically handle draco and meshopt-compressed assets without you having to
   // worry about binaries and such ...
-  const { nodes, materials } = useGLTF('/social_media.glb')
+  const { nodes, materials } = useGLTF('/vinrsr_logo_3d-transformed.glb')
+  // const { nodes, materials } = useGLTF('/social_media.glb')
   // const { nodes, materials } = useGLTF('/Youtube.glb')
   // const { nodes, materials } = useGLTF('/instagram-logo.glb')
   // const { nodes, materials } = useGLTF('/banana-v1-transformed.glb')
@@ -59,7 +60,10 @@ function Instagram({ index, z, speed }) {
   return (
     // <Detailed ref={ref} distances={[0, 65, 80]}>
     <Detailed ref={ref} distances={[1, 1, 1]}>
-      <mesh scale={5} geometry={nodes.BlenderLogo.geometry}>
+      <mesh scale={[2, .2, 2]} geometry={nodes.mesh_logo.geometry}>
+        <meshStandardMaterial color="#ffffff" />
+      </mesh>
+      {/* <mesh scale={5} geometry={nodes.BlenderLogo.geometry}>
         <meshStandardMaterial color="red" />
       </mesh>
       <mesh scale={5} geometry={nodes.DiscordLogo.geometry}>
@@ -91,7 +95,7 @@ function Instagram({ index, z, speed }) {
       </mesh>
       <mesh scale={5} geometry={nodes.YoutubeLogo.geometry}>
         <meshStandardMaterial color="red" />
-      </mesh>
+      </mesh> */}
       {/* <mesh geometry={nodes.instagram_logo_mesh.geometry} material={materials.material} material-emissive="red" /> */}
       {/* <mesh geometry={nodes.banana_high.geometry} material={materials.skin} material-emissive="#ff9f00" />
       <mesh geometry={nodes.banana_mid.geometry} material={materials.skin} material-emissive="#ff9f00" />
@@ -104,8 +108,8 @@ export default function Instagrams({ speed = 1, count = 80, depth = 80, easing =
   return (
     // No need for antialias (faster), dpr clamps the resolution to 1.5 (also faster than full resolution)
     // As of three > r154 if postprocessing is used the canvas can not have tonemapping (which is what "flat" is, no tonemapping)
-    <Canvas flat gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 10], fov: 20, near: 0.01, far: depth + 15 }}>
-      <color attach="background" args={['skyblue']} />
+    <Canvas style={{ position: 'relative', top: 0, left: 0, width: '100%', height: '100vh' }} flat gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 10], fov: 20, near: 0.01, far: depth + 15 }}>
+      <color attach="background" args={['#0a0a0a']} />
       {/* As of three > r153 lights work differently in threejs, to get similar results as before you have to add decay={0} */}
       <spotLight position={[10, 20, 10]} penumbra={1} decay={0} intensity={3} color="orange" />
       {/* Using cubic easing here to spread out objects a little more interestingly, i wanted a sole big object up front ... */}

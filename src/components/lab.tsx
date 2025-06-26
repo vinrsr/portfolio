@@ -107,7 +107,7 @@ export default function LabSection() {
             </div>
           </div>
 
-          <a href="https://your-studio-name.itch.io" target="_blank" rel="noopener noreferrer" className="experiment-card-link">
+          <a href="https://lemper-studio.itch.io/" target="_blank" rel="noopener noreferrer" className="experiment-card-link">
             <div className="experiment-card">
               <div className="image-wrapper">
                 <Image
@@ -117,7 +117,7 @@ export default function LabSection() {
                   objectFit="contain" // Use "contain" to see the whole logo
                 />
               </div>
-              <div className="card-content">
+              <div className="card-content" style={{textAlign: 'center'}}>
                 <h3 className="card-title-link">
                   <span>Lemper Studio</span>
                   <Icon icon="mdi:arrow-top-right" />

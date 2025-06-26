@@ -1,9 +1,11 @@
 import '../app/styles/landing.css';
+import Balls from '@/components/balls/balls';
+
 
 export default function LandingSection() {
   return (
     <section className="landing-section">
-        <h1>Content</h1>
+      <Balls />
     </section>
   )
 }
