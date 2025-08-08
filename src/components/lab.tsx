@@ -127,6 +127,26 @@ export default function LabSection() {
             </div>
           </a>
 
+          <a href="https://folia.vinrsr.com/" target="_blank" rel="noopener noreferrer" className="experiment-card-link">
+            <div className="experiment-card">
+              <div className="image-wrapper">
+                <Image
+                  src="/folia.png"
+                  alt="Folia Landing Page"
+                  layout="fill"
+                  objectFit="cover" // Fill the wrapper, may crop image
+                />
+              </div>
+              <div className="card-content" style={{textAlign: 'center'}}>
+                <h3 className="card-title-link">
+                  <span>Folia</span>
+                  <Icon icon="mdi:arrow-top-right" />
+                </h3>
+                <p>An interactive 3D showcase for a fictional beverage brand.</p>
+              </div>
+            </div>
+          </a>
+
         </div>
       </div>
     </section>
