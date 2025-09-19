@@ -147,6 +147,26 @@ export default function LabSection() {
             </div>
           </a>
 
+          <div className="experiment-card">
+            <div className='video-wrapper'>
+              {/* --- APPLY THE SAME CHECK HERE --- */}
+              {hasMounted && (
+                <ReactPlayer 
+                  url="https://youtube.com/shorts/m7LSqfuRnbA?feature=share" 
+                  width="100%"
+                  height="100%"
+                  controls={true}
+                  light={true}
+                  className="react-player"
+                />
+              )}
+            </div>
+            <div className="card-content">
+              <h3>Folia - A Cinematic Product Showcase</h3>
+              <p>A 3D animated commercial for a premium brand, created from scratch.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
