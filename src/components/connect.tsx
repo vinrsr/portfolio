@@ -32,6 +32,13 @@ export default function ConnectSection() {
 
           <motion.div variants={childVariants} className="social-links">
             <a
+              href="mailto:kevinramadhan244@gmail.com"
+              className="social-link"
+            >
+              <Icon icon="mdi:email-outline" />
+              kevinramadhan244@gmail.com
+            </a>
+            <a
               href="https://github.com/vinrsr"
               target="_blank"
               rel="noopener noreferrer"
