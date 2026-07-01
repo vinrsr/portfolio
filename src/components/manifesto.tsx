@@ -40,8 +40,7 @@ export default function ManifestoSection() {
         </motion.h1>
         <motion.p variants={childVariants} className="hero-bio">
           I build high-performance backend systems and distributed architectures. Specialized in Go
-          and TypeScript: microservices, event-driven pipelines, scalable databases. Comfortable
-          across the full stack when the work calls for it.
+          and TypeScript: microservices, event-driven pipelines, scalable databases.
         </motion.p>
 
 <motion.div variants={childVariants} className="hero-cta">
