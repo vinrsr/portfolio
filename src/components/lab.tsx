@@ -1,174 +1,117 @@
-// components/LabSection.tsx
-
-// --- 1. ADD "useState" and "useEffect" TO YOUR IMPORTS ---
 "use client";
 import '../app/styles/lab.css';
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import ReactPlayer from 'react-player/youtube';
 import Image from 'next/image';
 
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  liveUrl?: string;
+  repoUrl?: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+const projects: Project[] = [
+  {
+    title: 'WatchYourAPI',
+    description:
+      'SaaS platform for API runtime monitoring. Users register their endpoints and get email notifications the moment any API returns a non-2xx response.',
+    tags: ['Next.js', 'TypeScript', 'Express.js', 'PostgreSQL', 'Redis', 'Drizzle', 'Turborepo'],
+    liveUrl: 'https://watchyourapi-web.vercel.app/',
+    imageSrc: '/watchyourapi-landing-page.png',
+    imageAlt: 'WatchYourAPI Landing Page',
+  },
+  {
+    title: 'Folia',
+    description:
+      'An interactive 3D product showcase for a fictional beverage brand. Built with React Three Fiber, Rapier physics, and Next.js.',
+    tags: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber'],
+    liveUrl: 'https://folia.vinrsr.com/',
+    imageSrc: '/folia.png',
+    imageAlt: 'Folia Landing Page',
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 export default function LabSection() {
-  // --- 2. CREATE A STATE TO TRACK IF THE PAGE HAS MOUNTED ---
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    // This effect runs only once on the client, after the initial render.
-    setHasMounted(true);
-  }, []);
-  
   return (
-    <section id="lab" className="lab-section">
-      <div className="lab-content">
-        <h2 className="lab-title">The Lab</h2>
-        <p className="lab-intro">
-          A collection of experiments, samples, prototypes, and explorations.
-        </p>
-        
-        <div className="lab-grid">
-          
-          <div className="experiment-card">
-            <div className='video-wrapper'>
-              {/* --- 3. ONLY RENDER THE PLAYER IF hasMounted IS TRUE --- */}
-              {hasMounted && (
-                <ReactPlayer
-                  url="https://youtu.be/_6D1-HA9XdE"
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light={true}
-                  className="react-player"
-                />
-              )}
-            </div>
-            <div className="card-content">
-              <h3>Experiment 001: Car Commercial</h3>
-              <p>Porsche 718 Cayman GT4 Car Commercial</p>
-            </div>
-          </div>
-          
-          <div className="experiment-card">
-            <div className='video-wrapper'>
-              {/* --- APPLY THE SAME CHECK HERE --- */}
-              {hasMounted && (
-                <ReactPlayer 
-                  url="https://youtu.be/afq56cKsOzE"
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light={true}
-                  className="react-player"
-                />
-              )}
-            </div>
-            <div className="card-content">
-              <h3>Experiment 002: Metahuman Cinematic</h3>
-              <p>Costumizing and Animating a Metahuman</p>
-            </div>
-          </div>
-
-          <div className="experiment-card">
-            <div className='video-wrapper'>
-              {/* --- APPLY THE SAME CHECK HERE --- */}
-              {hasMounted && (
-                <ReactPlayer 
-                  url="https://youtu.be/QL2FUdz7Glk" 
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light={true}
-                  className="react-player"
-                />
-              )}
-            </div>
-            <div className="card-content">
-              <h3>Experiment 003: The Forgotten Monolith</h3>
-              <p>Trying out my Environment Skill</p>
-            </div>
-          </div>
-
-          <div className="experiment-card">
-            <div className='video-wrapper'>
-              {/* --- APPLY THE SAME CHECK HERE --- */}
-              {hasMounted && (
-                <ReactPlayer 
-                  url="https://youtu.be/uPhQBglnhKQ" 
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light={true}
-                  className="react-player"
-                />
-              )}
-            </div>
-            <div className="card-content">
-              <h3>Experiment 004: Drink Commercial</h3>
-              <p>Sample of Drink Commercial Using Unreal Engine</p>
-            </div>
-          </div>
-
-          <a href="https://lemper-studio.itch.io/" target="_blank" rel="noopener noreferrer" className="experiment-card-link">
-            <div className="experiment-card">
-              <div className="image-wrapper">
-                <Image
-                  src="/lemper-logo.jpg" // <-- Path to your logo
-                  alt="Lemper Studio Logo"
-                  layout="fill"
-                  objectFit="contain" // Use "contain" to see the whole logo
-                />
-              </div>
-              <div className="card-content" style={{textAlign: 'center'}}>
-                <h3 className="card-title-link">
-                  <span>Lemper Studio</span>
-                  <Icon icon="mdi:arrow-top-right" />
-                </h3>
-                <p>Visit my game studio on itch.io to play my latest games</p>
-              </div>
-            </div>
-          </a>
-
-          <a href="https://folia.vinrsr.com/" target="_blank" rel="noopener noreferrer" className="experiment-card-link">
-            <div className="experiment-card">
-              <div className="image-wrapper">
-                <Image
-                  src="/folia.png"
-                  alt="Folia Landing Page"
-                  layout="fill"
-                  objectFit="cover" // Fill the wrapper, may crop image
-                />
-              </div>
-              <div className="card-content" style={{textAlign: 'center'}}>
-                <h3 className="card-title-link">
-                  <span>Folia</span>
-                  <Icon icon="mdi:arrow-top-right" />
-                </h3>
-                <p>An interactive 3D showcase for a fictional beverage brand.</p>
-              </div>
-            </div>
-          </a>
-
-          <div className="experiment-card">
-            <div className='video-wrapper'>
-              {/* --- APPLY THE SAME CHECK HERE --- */}
-              {hasMounted && (
-                <ReactPlayer 
-                  url="https://youtube.com/shorts/m7LSqfuRnbA?feature=share" 
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light={true}
-                  className="react-player"
-                />
-              )}
-            </div>
-            <div className="card-content">
-              <h3>Folia - A Cinematic Product Showcase</h3>
-              <p>A 3D animated commercial for a premium brand, created from scratch.</p>
-            </div>
-          </div>
-
+    <section id="projects" className="projects-section">
+      <motion.div
+        className="projects-content"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <div className="projects-header">
+          <motion.h2 variants={childVariants} className="projects-title">
+            Projects
+          </motion.h2>
+          <motion.p variants={childVariants} className="projects-intro">
+            Things I&apos;ve built: side projects and production work.
+          </motion.p>
         </div>
-      </div>
+
+        <motion.div variants={containerVariants} className="projects-grid">
+          {projects.map((project) => (
+            <motion.div variants={childVariants} className="project-card" key={project.title}>
+              <div className="project-image-wrapper">
+                <Image
+                  src={project.imageSrc}
+                  alt={project.imageAlt}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <div className="project-card-body">
+                <h3 className="project-card-title">{project.title}</h3>
+                <p className="project-card-desc">{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="project-tag">{tag}</span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link-btn project-link-primary"
+                    >
+                      <Icon icon="mdi:open-in-new" />
+                      Live Site
+                    </a>
+                  )}
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link-btn project-link-secondary"
+                    >
+                      <Icon icon="mdi:github" />
+                      Repo
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vinrsr",
-  description: "Personal site of vinrsr – game developer, creator, and visual world builder.",
+  title: "Kevin Ramadhan",
+  description: "Senior Software Engineer with 7 years of experience building high-performance backend systems and distributed architectures. Specialized in Go and TypeScript.",
 };
 
 export default function RootLayout({

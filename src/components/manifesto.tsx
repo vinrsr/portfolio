@@ -1,62 +1,79 @@
 import '../app/styles/manifesto.css';
 import { motion } from 'framer-motion';
-import Sculpture from './ManifestoVisual';
+import { Icon } from '@iconify/react';
+
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
 export default function ManifestoSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8 },
-    },
-  };
-
   return (
-    <section id="manifesto" className="manifesto-split-section">
-      
-      <div className="manifesto-visual-content">
-        <Sculpture />
-      </div>
+    <section id="manifesto" className="hero-section">
+      <nav className="hero-nav">
+        <span className="hero-nav-name">Kevin Ramadhan</span>
+        <div className="hero-nav-links">
+          <a href="#skills">Stack</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
 
-      <motion.div 
-        className="manifesto-text-content"
+      <motion.div
+        className="hero-content"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        animate="visible"
       >
-        <motion.h2 variants={childVariants} className="manifesto-title">
-          What I Build
-        </motion.h2>
-        
-        <motion.p variants={childVariants} className="manifesto-text">
-          I specialize in creating high-end,{' '}
-          <span className="highlight-text">interactive web experiences</span> that go beyond static pages. I build memorable digital destinations that capture attention and distinguish brands in a crowded marketplace.
+        <motion.p variants={childVariants} className="hero-eyebrow">
+          Senior Software Engineer · 7 years
         </motion.p>
-        
-        <motion.p variants={childVariants} className="manifesto-text">
-          My work is a unique synthesis of two disciplines: the rigorous engineering of a{' '}
-          <span className="highlight-text">full-stack web developer</span> and the cinematic artistry of a 3D visual designer. I build experiences on a foundation of clean, production-grade code while leveraging game engine principles to create dynamic, visually rich worlds.
+        <motion.h1 variants={childVariants} className="hero-name">
+          Kevin Ramadhan
+        </motion.h1>
+        <motion.p variants={childVariants} className="hero-bio">
+          I build high-performance backend systems and distributed architectures. Specialized in Go
+          and TypeScript: microservices, event-driven pipelines, scalable databases. Comfortable
+          across the full stack when the work calls for it.
         </motion.p>
 
-        <motion.p variants={childVariants} className="manifesto-text">
-          The result is a product that is both{' '}
-          <span className="highlight-text">technically robust and artistically compelling</span>, ensuring your vision is realized without compromise.
-        </motion.p>
-
+<motion.div variants={childVariants} className="hero-cta">
+          <a href="#projects" className="cta-primary">View Projects</a>
+          <a
+            href="/kevin-ramadhan-resume.pdf"
+            download
+            className="cta-secondary"
+          >
+            <Icon icon="mdi:download" />
+            Resume
+          </a>
+          <a
+            href="https://github.com/vinrsr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-secondary"
+          >
+            <Icon icon="mdi:github" />
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/kevin-ramadhan-359b24130/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-secondary"
+          >
+            <Icon icon="mdi:linkedin" />
+            LinkedIn
+          </a>
+        </motion.div>
       </motion.div>
-
     </section>
   );
 }
