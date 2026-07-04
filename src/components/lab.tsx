@@ -33,6 +33,15 @@ const projects: Project[] = [
     imageSrc: '/folia.png',
     imageAlt: 'Folia Landing Page',
   },
+  {
+    title: 'Short King',
+    description:
+      'A URL shortener with a Go backend and Next.js frontend, backed by PostgreSQL for persistence and Redis for fast lookups.',
+    tags: ['Go', 'Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
+    liveUrl: 'https://shortking-web.vercel.app',
+    imageSrc: '/shortking-landing-page.png',
+    imageAlt: 'Short King Landing Page',
+  },
 ];
 
 const containerVariants = {
@@ -65,8 +74,15 @@ export default function LabSection() {
         </div>
 
         <motion.div variants={containerVariants} className="projects-grid">
-          {projects.map((project) => (
-            <motion.div variants={childVariants} className="project-card" key={project.title}>
+          {projects.map((project, index) => (
+            <motion.div
+              variants={childVariants}
+              className="project-card"
+              key={project.title}
+              whileHover={{ y: -6 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
+              <span className="project-card-index">{String(index + 1).padStart(2, '0')}</span>
               <div className="project-image-wrapper">
                 <Image
                   src={project.imageSrc}
@@ -74,9 +90,26 @@ export default function LabSection() {
                   fill
                   style={{ objectFit: 'cover' }}
                 />
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-image-overlay"
+                    aria-label={`Open ${project.title} live site`}
+                  >
+                    <span className="project-image-overlay-cta">
+                      <Icon icon="mdi:arrow-top-right" />
+                      View Live
+                    </span>
+                  </a>
+                )}
               </div>
               <div className="project-card-body">
-                <h3 className="project-card-title">{project.title}</h3>
+                <h3 className="project-card-title">
+                  {project.title}
+                  <Icon icon="mdi:arrow-right" className="project-card-title-arrow" />
+                </h3>
                 <p className="project-card-desc">{project.description}</p>
                 <div className="project-tags">
                   {project.tags.map((tag) => (
