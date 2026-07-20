@@ -19,8 +19,9 @@ export default function ManifestoSection() {
       <nav className="hero-nav">
         <span className="hero-nav-name">Kevin Ramadhan</span>
         <div className="hero-nav-links">
-          <a href="#skills">Stack</a>
+          <a href="#summary">Summary</a>
           <a href="#experience">Experience</a>
+          <a href="#skills">Stack</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </div>

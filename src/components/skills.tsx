@@ -15,23 +15,38 @@ type Category = {
 const categories: Category[] = [
   {
     label: 'Languages',
-    items: ['Go', 'TypeScript', 'JavaScript', 'Node.js'],
+    items: ['Go', 'TypeScript', 'Node.js', 'JavaScript'],
     color: '#4f46e5',
   },
   {
-    label: 'Frameworks',
-    items: ['Gin', 'React', 'Next.js', 'Tailwind CSS'],
+    label: 'Frameworks & UI',
+    items: ['Gin', 'Express.js', 'NestJS', 'React', 'Next.js', 'Tailwind CSS'],
     color: '#0ea5e9',
   },
   {
-    label: 'Architecture',
-    items: ['Microservices', 'Distributed Systems', 'Event-Driven', 'Micro-Frontends'],
+    label: 'System Architecture',
+    items: ['Microservices', 'Distributed Systems', 'Event-Driven Architecture', 'Micro-Frontends'],
     color: '#8b5cf6',
   },
   {
-    label: 'Databases',
-    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ETCD', 'Amazon S3', 'MinIO'],
+    label: 'API & Protocols',
+    items: ['gRPC', 'RESTful APIs', 'WebSockets'],
+    color: '#f43f5e',
+  },
+  {
+    label: 'Security & Auth',
+    items: ['JWT', 'Symmetric/Asymmetric Cryptography', 'Key Management (HMAC/RSA)', 'RBAC'],
+    color: '#dc2626',
+  },
+  {
+    label: 'Databases & Storage',
+    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ETCD', 'Amazon S3', 'minio'],
     color: '#10b981',
+  },
+  {
+    label: 'ORMs & Data Tools',
+    items: ['Gorm', 'Prisma', 'Sequelize'],
+    color: '#d946ef',
   },
   {
     label: 'Message Brokers',
@@ -39,23 +54,24 @@ const categories: Category[] = [
     color: '#f59e0b',
   },
   {
-    label: 'API & Security',
-    items: ['gRPC', 'REST', 'WebSockets', 'JWT', 'RBAC', 'HMAC', 'RSA'],
-    color: '#f43f5e',
-  },
-  {
-    label: 'ORMs',
-    items: ['Gorm', 'Prisma', 'Drizzle', 'Sequelize'],
-    color: '#d946ef',
-  },
-  {
-    label: 'Tools',
-    items: ['Docker', 'Git'],
+    label: 'Utilities',
+    items: [
+      'Docker',
+      'Git',
+      'CI/CD (GitHub Actions, Jenkins)',
+      'Grafana',
+      'Railway',
+      'Vercel',
+      'Jira',
+      'Confluence',
+      'Trello',
+      'Slack',
+    ],
     color: '#06b6d4',
   },
   {
     label: 'AI Tools',
-    items: ['Claude Code', 'Antigravity', 'OpenCode'],
+    items: ['Claude Code', 'OpenCode', 'Antigravity'],
     color: '#f97316',
   },
   {
@@ -97,7 +113,7 @@ export default function SkillsSection() {
           scrollTrigger: {
             trigger: card,
             start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            toggleActions: 'play none none none',
           },
         })
           .fromTo(
