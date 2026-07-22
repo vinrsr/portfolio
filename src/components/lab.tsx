@@ -20,7 +20,7 @@ const projects: Project[] = [
     description:
       'SaaS platform for API runtime monitoring. Users register their endpoints and get email notifications the moment any API returns a non-2xx response.',
     tags: ['Next.js', 'TypeScript', 'Express.js', 'PostgreSQL', 'Redis', 'Drizzle', 'Turborepo'],
-    liveUrl: 'https://watchyourapi-web.vercel.app/',
+    liveUrl: 'https://watchyourapi.vinrsr.com',
     imageSrc: '/watchyourapi-landing-page.png',
     imageAlt: 'WatchYourAPI Landing Page',
   },
@@ -29,7 +29,7 @@ const projects: Project[] = [
     description:
       'An interactive 3D product showcase for a fictional beverage brand. Built with React Three Fiber, Rapier physics, and Next.js.',
     tags: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber'],
-    liveUrl: 'https://folia.vinrsr.com/',
+    liveUrl: 'https://folia.vinrsr.com',
     imageSrc: '/folia.png',
     imageAlt: 'Folia Landing Page',
   },
@@ -38,7 +38,7 @@ const projects: Project[] = [
     description:
       'A URL shortener with a Go backend and Next.js frontend, backed by PostgreSQL for persistence and Redis for fast lookups.',
     tags: ['Go', 'Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
-    liveUrl: 'https://shortking-web.vercel.app',
+    liveUrl: 'https://shortking.vinrsr.com',
     imageSrc: '/shortking-landing-page.png',
     imageAlt: 'Short King Landing Page',
   },
