@@ -40,7 +40,7 @@ const categories: Category[] = [
   },
   {
     label: 'Databases & Storage',
-    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ETCD', 'Amazon S3', 'minio'],
+    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ETCD', 'S3', 'minio'],
     color: '#10b981',
   },
   {
@@ -54,25 +54,24 @@ const categories: Category[] = [
     color: '#f59e0b',
   },
   {
-    label: 'Utilities',
-    items: [
-      'Docker',
-      'Git',
-      'CI/CD (GitHub Actions, Jenkins)',
-      'Grafana',
-      'Railway',
-      'Vercel',
-      'Jira',
-      'Confluence',
-      'Trello',
-      'Slack',
-    ],
+    label: 'Agile & Collaboration',
+    items: ['Jira', 'Confluence', 'Trello', 'Slack', 'Mattermost'],
     color: '#06b6d4',
   },
   {
     label: 'AI Tools',
     items: ['Claude Code', 'OpenCode', 'Antigravity'],
     color: '#f97316',
+  },
+  {
+    label: 'Utilities',
+    items: ['Git', 'Grafana', 'Railway', 'Vercel'],
+    color: '#0891b2',
+  },
+  {
+    label: 'Cloud & Infrastructure',
+    items: ['AWS (EC2)', 'Docker', 'Caddy', 'CI/CD (GitHub Actions)'],
+    color: '#eab308',
   },
   {
     label: 'Spoken',
