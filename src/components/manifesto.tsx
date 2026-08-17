@@ -40,11 +40,10 @@ export default function ManifestoSection() {
           Kevin Ramadhan
         </motion.h1>
         <motion.p variants={childVariants} className="hero-bio">
-          I build high-performance backend systems and distributed architectures. Specialized in Go
-          and TypeScript: microservices, event-driven pipelines, scalable databases.
+          I build high-performance backend systems, distributed architectures, and AI-integrated applications. Specialized in Go and TypeScript: microservices, event-driven pipelines, scalable databases, RAG, and agentic workflows.
         </motion.p>
 
-<motion.div variants={childVariants} className="hero-cta">
+        <motion.div variants={childVariants} className="hero-cta">
           <a href="#projects" className="cta-primary">View Projects</a>
           <a
             href="/kevin-ramadhan-resume.pdf"

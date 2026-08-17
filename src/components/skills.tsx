@@ -40,7 +40,7 @@ const categories: Category[] = [
   },
   {
     label: 'Databases & Storage',
-    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ETCD', 'S3', 'minio'],
+    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ETCD', 'S3', 'minio', 'pgvector'],
     color: '#10b981',
   },
   {
@@ -52,6 +52,18 @@ const categories: Category[] = [
     label: 'Message Brokers',
     items: ['Apache Kafka', 'RabbitMQ'],
     color: '#f59e0b',
+  },
+  {
+    label: 'AI/LLM Engineering',
+    items: [
+      'Claude API (Anthropic)',
+      'LLM Integration',
+      'RAG (Retrieval-Augmented Generation)',
+      'Agentic Workflows',
+      'Tool Use / Function Calling',
+      'Embeddings',
+    ],
+    color: '#a855f7',
   },
   {
     label: 'Agile & Collaboration',
@@ -79,12 +91,6 @@ const categories: Category[] = [
     color: '#64748b',
   },
 ];
-
-function getSpan(itemCount: number) {
-  if (itemCount <= 2) return 2;
-  if (itemCount <= 4) return 3;
-  return 4;
-}
 
 export default function SkillsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -167,7 +173,6 @@ export default function SkillsSection() {
             <div
               className="skill-card"
               key={cat.label}
-              data-span={getSpan(cat.items.length)}
               style={{ '--card-accent': cat.color } as CSSProperties}
             >
               <span className="skill-card-label">{cat.label}</span>

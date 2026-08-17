@@ -16,15 +16,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: 'WatchYourAPI',
-    description:
-      'SaaS platform for API runtime monitoring. Users register their endpoints and get email notifications the moment any API returns a non-2xx response.',
-    tags: ['Next.js', 'TypeScript', 'Express.js', 'PostgreSQL', 'Redis', 'Drizzle', 'Turborepo'],
-    liveUrl: 'https://watchyourapi.vinrsr.com',
-    imageSrc: '/watchyourapi-landing-page.png',
-    imageAlt: 'WatchYourAPI Landing Page',
-  },
-  {
     title: 'Folia',
     description:
       'An interactive 3D product showcase for a fictional beverage brand. Built with React Three Fiber, Rapier physics, and Next.js.',
@@ -34,13 +25,31 @@ const projects: Project[] = [
     imageAlt: 'Folia Landing Page',
   },
   {
-    title: 'Short King',
+    title: 'WatchYourAPI',
+    description:
+      'SaaS platform for API runtime monitoring. Users register their endpoints and get email notifications the moment any API returns a non-2xx response.',
+    tags: ['Next.js', 'TypeScript', 'Express.js', 'PostgreSQL', 'Redis', 'Drizzle', 'Turborepo'],
+    liveUrl: 'https://watchyourapi.vinrsr.com',
+    imageSrc: '/watchyourapi-landing-page.png',
+    imageAlt: 'WatchYourAPI Landing Page',
+  },
+  {
+    title: 'ShortKing',
     description:
       'A URL shortener with a Go backend and Next.js frontend, backed by PostgreSQL for persistence and Redis for fast lookups.',
     tags: ['Go', 'Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
     liveUrl: 'https://shortking.vinrsr.com',
     imageSrc: '/shortking-landing-page.png',
     imageAlt: 'Short King Landing Page',
+  },
+  {
+    title: 'CekHarga',
+    description:
+      'An agentic AI tool that verifies whether a price is fair using live web search and retrieval-augmented generation (RAG). Built solo with Go, Claude API, and Postgres/pgvector.',
+    tags: ['Go', 'Claude API', 'PostgreSQL', 'pgvector', 'RAG'],
+    repoUrl: 'https://github.com/vinrsr/cek-harga',
+    imageSrc: '/cekharga-ss.png',
+    imageAlt: 'CekHarga Screenshot',
   },
 ];
 
@@ -74,75 +83,79 @@ export default function LabSection() {
         </div>
 
         <motion.div variants={containerVariants} className="projects-grid">
-          {projects.map((project, index) => (
-            <motion.div
-              variants={childVariants}
-              className="project-card"
-              key={project.title}
-              whileHover={{ y: -6 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            >
-              <span className="project-card-index">{String(index + 1).padStart(2, '0')}</span>
-              <div className="project-image-wrapper">
-                <Image
-                  src={project.imageSrc}
-                  alt={project.imageAlt}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-image-overlay"
-                    aria-label={`Open ${project.title} live site`}
-                  >
-                    <span className="project-image-overlay-cta">
-                      <Icon icon="mdi:arrow-top-right" />
-                      View Live
-                    </span>
-                  </a>
-                )}
-              </div>
-              <div className="project-card-body">
-                <h3 className="project-card-title">
-                  {project.title}
-                  <Icon icon="mdi:arrow-right" className="project-card-title-arrow" />
-                </h3>
-                <p className="project-card-desc">{project.description}</p>
-                <div className="project-tags">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="project-tag">{tag}</span>
-                  ))}
-                </div>
-                <div className="project-links">
-                  {project.liveUrl && (
+          {projects.map((project, index) => {
+            const overlayUrl = project.liveUrl ?? project.repoUrl;
+
+            return (
+              <motion.div
+                variants={childVariants}
+                className="project-card"
+                key={project.title}
+                whileHover={{ y: -6 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <span className="project-card-index">{String(index + 1).padStart(2, '0')}</span>
+                <div className="project-image-wrapper">
+                  <Image
+                    src={project.imageSrc}
+                    alt={project.imageAlt}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                  {overlayUrl && (
                     <a
-                      href={project.liveUrl}
+                      href={overlayUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="project-link-btn project-link-primary"
+                      className="project-image-overlay"
+                      aria-label={`Open ${project.title} ${project.liveUrl ? 'live site' : 'repository'}`}
                     >
-                      <Icon icon="mdi:open-in-new" />
-                      Live Site
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a
-                      href={project.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link-btn project-link-secondary"
-                    >
-                      <Icon icon="mdi:github" />
-                      Repo
+                      <span className="project-image-overlay-cta">
+                        <Icon icon={project.liveUrl ? 'mdi:arrow-top-right' : 'mdi:github'} />
+                        {project.liveUrl ? 'View Live' : 'View Repo'}
+                      </span>
                     </a>
                   )}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <div className="project-card-body">
+                  <h3 className="project-card-title">
+                    {project.title}
+                    <Icon icon="mdi:arrow-right" className="project-card-title-arrow" />
+                  </h3>
+                  <p className="project-card-desc">{project.description}</p>
+                  <div className="project-tags">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="project-tag">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="project-links">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link-btn project-link-primary"
+                      >
+                        <Icon icon="mdi:open-in-new" />
+                        Live Site
+                      </a>
+                    )}
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`project-link-btn ${project.liveUrl ? 'project-link-secondary' : 'project-link-primary'}`}
+                      >
+                        <Icon icon="mdi:github" />
+                        Repo
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </motion.div>
     </section>
