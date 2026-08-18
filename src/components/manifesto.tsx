@@ -34,13 +34,13 @@ export default function ManifestoSection() {
         animate="visible"
       >
         <motion.p variants={childVariants} className="hero-eyebrow">
-          Senior Software Engineer · 7 years
+          Senior Software Engineer · 7 years · BUILDING AI-INTEGRATED SYSTEMS
         </motion.p>
         <motion.h1 variants={childVariants} className="hero-name">
           Kevin Ramadhan
         </motion.h1>
         <motion.p variants={childVariants} className="hero-bio">
-          I build high-performance backend systems, distributed architectures, and AI-integrated applications. Specialized in Go and TypeScript: microservices, event-driven pipelines, scalable databases, RAG, and agentic workflows.
+          I build high-performance backend systems and, more recently, agentic AI applications, systems that reason, retrieve, and act, not just respond. Specialized in Go and TypeScript: microservices, event-driven pipelines, scalable databases, RAG, and multi-step agent workflows.
         </motion.p>
 
         <motion.div variants={childVariants} className="hero-cta">

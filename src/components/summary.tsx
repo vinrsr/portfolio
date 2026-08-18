@@ -49,12 +49,11 @@ export default function SummarySection() {
         <div className="summary-card">
           <Icon icon="mdi:format-quote-open" className="summary-quote-icon" />
           <p className="summary-text">
-            Senior Full-Stack Software Engineer with 7 years of experience building
-            high-performance backend systems and distributed architectures. Specialized in Go and
-            TypeScript, with hands-on experience designing microservices, event-driven pipelines,
-            and scalable database systems, taking complex features from design to production.
-            Leverages AI-assisted development tools to accelerate delivery while maintaining code
-            quality.
+            A senior engineer with 7 years of experience building high-performance backend systems and distributed
+            architectures. Specialized in Go and TypeScript, with hands-on experience designing microservices, event-driven
+            pipelines, and scalable database systems, taking complex features from design to production. Recently expanded
+            into AI-integrated systems, building multi-step AI agents with retrieval-augmented generation (RAG) and real
+            evaluation pipelines, and looking to grow further in AI-focused engineering roles.
           </p>
         </div>
       </div>
